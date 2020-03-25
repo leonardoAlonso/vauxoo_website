@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="index">
+        <t t-call="website.layout">
+            <t t-set="'title">Academy</t>
+            <div class="oe_estructure">
+                <div class="container">
+                    <t t-foreach="teachers" t-as="teacher">
+                        <p>
+                            <a t-attf-href="/academy/{{slug(teacher)}}">
+                                <t t-esc="teacher.name"/>
+                            </a>
+                        </p>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="biography">
+        <t t-call="website.layout">
+            <t t-set="title">Academy</t>
+            <div class="oe_estructure"/>
+            <div class="oe_estructure">
+                <div class="container">
+                    <h3 t-field="person.name"></h3>
+                    <p>Las modified <i t-field="person.write_date" t-options="{'widget': 'relative'}"/></p>
+                    <div t-field="person.biography"/>
+                </div>
+            </div>
+            <div class="oe_estructure"/>
+        </t>
+    </template>
+
+    <template id="products_item" inherit_id="website_sale.products_item">
+        <xpath expr="//h6" position="after">
+            <p t-esc="product.id"></p>
+        </xpath>
+        <xpath expr="//h6" position="attributes">
+            <attribuite name="class" add="col-md-12" separator=" "/>
+        </xpath>
+    </template>
+</odoo>
